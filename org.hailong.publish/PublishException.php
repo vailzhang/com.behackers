@@ -1,0 +1,11 @@
+<?php
+
+define("ERROR_PUBLISH_SCHEMA_IS_LOCK",ERROR_PUBLISH | 0x0001);
+
+define("ERROR_PUBLISH_NOT_FOUND_DOMAIN",ERROR_PUBLISH | 0x0002);
+define("ERROR_PUBLISH_NOT_FOUND_SCHEMA",ERROR_PUBLISH | 0x0003);
+
+class PublishException extends Exception{
+	
+}
+?>

@@ -1,0 +1,308 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf8">
+<title>Hailong Studio</title>
+<link rel="stylesheet" href="css/style.css" />
+
+<script type='text/javascript' src='js.php' ></script>
+<script type='text/javascript'>
+
+	function addTextInput(el,name){
+		
+		var p = $(el).parents("ul");
+		
+		var inputs = $("input[type='text']",p);
+		
+		var c = inputs.size();
+		
+		if(window.textInputCount === undefined){
+			window.textInputCount = c;
+		}
+		else if(c < window.textInputCount){
+			c = ++ window.textInputCount;
+		}
+		
+		$("<li><input type='text' name='"+name+c+"' /></li>").insertBefore($(el).parents("li"));
+		
+	}
+	
+	function removeTextInput(el){
+		$(el).parents("li").remove();
+	}
+
+</script>
+<style text='text/css'>
+	form {
+		font-size: 16px;
+	}
+	form span{
+		font-size: 16px;
+	}
+	form span.h {
+		min-width: 120px;
+	}
+	form input {
+		min-width: auto;
+		font-size: 16px;
+	}
+	form select {
+		font-size: 16px;
+	}
+	form div {
+		padding: 6px;
+	}
+	form table {
+		font-size: 16px;
+		border-collapse: 0px;
+		border-spacing: 1px;
+		width: auto;
+		table-layout: auto;
+		background-color: #dddddd;
+		border-width: 0px;
+	}
+	form table th {
+		max-width: 120px;
+		font-style: bold;
+		text-align: left;
+		background-color: #ffffff;
+		padding: 6px;
+		padding-left: 12px;
+		padding-right: 12px;
+	}
+	form table td {
+		padding: 6px;
+		padding-left: 12px;
+		padding-right: 12px;
+		background-color: #ffffff;
+	}
+	form input.confirm{
+		min-width: 64px;
+		min-height: 44px;
+		font-size: 22px;
+		border: solid 1px #dddddd;
+		background-color: #00b84a;
+		color: #ffffff;
+	}
+	.log{
+		padding: 12px;
+		border: solid 1px #dddddd;
+		font-size: 16px;
+		width: 320px;
+		margin: 12px;
+	}
+	.log .log-item{
+		margin: 12px;
+		padding: 12px;
+		border-bottom: solid 1px #dddddd;
+	}
+	
+	.log div {
+		padding: 6px;
+	}
+	
+	.chef {
+		width: 320px;
+		border: solid 1px #dddddd;
+		padding: 6px;
+		margin-left: 12px;
+	}
+	
+</style>
+</head>
+<body>
+<div class='screen'>
+	
+	<div class="toolbar">
+		<p><input type='button' id='closeButton' value='解锁并关闭' view='UI.Button' /></p>
+	</div>
+	<div class="toolbar">
+		<p>
+			<span id="lockLabel" style='color: red;'></span>
+		</p>
+		<p>
+			<input type='button' id='unlockButton' value='强制解锁并操作' view='UI.Button' />
+		</p>
+	</div>
+	<div class="toolbar" id="confirmView" view="UI.View">
+		<form method="post" action="?" id="confirmForm" view="UI.Form" accept-charset="utf8">
+			<input type='hidden' name='oid' />
+			<table>
+				<tbody>
+					<tr>
+						<th>
+							厨师反馈
+						</th>
+						<td>
+							<textarea name="remark"></textarea>
+						</td>
+					</tr>
+					<tr>
+						<th>
+						
+						</th>
+						<td>
+							<input type='submit' class="confirm" value='确认厨师服务完成' />
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</form>
+	</div>
+	
+	<div class="toolbar" id="cancelView" view="UI.View">
+		<form method="post" action="?" id="cancelForm" view="UI.Form" accept-charset="utf8">
+			<input type='hidden' name='oid' />
+			<table>
+				<tbody>
+					<tr>
+						<th>
+							取消理由
+						</th>
+						<td>
+							<textarea name="remark"></textarea>
+						</td>
+					</tr>
+					<tr>
+						<th>
+						
+						</th>
+						<td>
+							<input type='submit' class="confirm" value='取消订单' />
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</form>
+	</div>
+	<form method="post" action="?" id="editForm" view="UI.Form" accept-charset="utf8">
+		<input type='hidden' name='oid' />
+		<table>
+			<tbody>
+				<tr>
+					<th>
+						订单状态
+					</th>
+					<td colspan="2">
+						<span id="statusLabel" view="UI.Label"></span>
+					</td>
+					<td rowspan="11">
+						<div style="height: 100%; overflow: auto;">
+							<div class="chef">
+								<div id="chefTemplate" view="UI.Template" style="border-bottom: solid 1px #dddddd; margin-bottom: 6px; min-height: 120px">
+					
+									<input type='radio' name='chefId' databind="value:v('pid');checked:v('checked')" style="float: left; margin-top: 12px;" />
+									
+									<img style="margin-top: 12px; float: left; background-color: #ffffff; width: 100px; height: 100px;" databind="src:v('logo')"></img>
+					
+									<div style="margin-left: 130px; padding: 0px;">
+										<p style="font: 16px; color: #333333;" databind="text:v('name')"></label></p>
+										<p style="font: 16px; color: #e24500;" databind="text:v('title')"></label></p>
+										<p style="font: 12px; color: #69584f;" databind="text:v('area')"></label></p>
+										<p><label>价格: ¥</label><label style="font: 16px; color: #333333;" databind="text:v('price')"></label></p>
+									</div>			
+									
+								</div>
+							</div>
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<th>
+						订单编号:
+					</th>
+					<td colspan='2'>
+						<span id="codeLabel" view="UI.Label"></span>
+						<span>下单时间:</span>
+						<span id="createTimeLabel" view="UI.Label"></span>
+					</td>
+				</tr>
+				<tr>
+					<th>
+						客户信息:
+					</th>
+					<td colspan='2'>
+						<span id="nameLabel" view="UI.Label"></span>
+						<span>手机号:</span>
+						<span id="phoneLabel" view="UI.Label"></span>
+					</td>
+				</tr>
+				<tr>
+					<th>
+						就餐时间:
+					</th>
+					<td colspan='2'>
+						<input style='min-width: 64px;' type='text' name="orderDay" id="orderDay" view="UI.DateText" />
+						<input type='radio' name='orderMeal' value='1' />
+						午餐
+						<input type='radio' name='orderMeal' value='2' />
+						晚餐
+					</td>
+				</tr>
+				<tr>
+					<th>就餐地址</th>
+					<td colspan='2'>
+						<select id="city" view="UI.Select"></select>
+						<select id="area" view="UI.Select"></select><br />
+						<input name="address" style='min-width: 320px;' type='text' value='' />
+					</td>
+				</tr>
+				<tr>
+					<th align="center">
+						<span style='text-align: center;' id="packageLabel" view="UI.Label"></span>
+					</th>
+					<td colspan='2'>
+						<ul id="foodsLabel" view="UI.Label">
+						</ul>	
+					</td>
+				</tr>
+				<tr>
+					<th >
+						价格:
+					</th>
+					<td colspan='2'>
+						<input type='text' name='price' value='' />
+					</td>
+				</tr>
+				<tr>
+					<th >
+						人数:
+					</th>
+					<td colspan='2'>
+						<input type='text' name='userCount' value='' />
+					</td>
+				</tr>
+				<tr>
+					<th>
+						食材
+					</th>
+					<td colspan='2'>
+						<input type='radio' name='orderFood' value='0' />
+						自备食材
+						<input type='radio' name='orderFood' value='1' />
+						代买食材
+					</td>
+				</tr>
+				<tr>
+					<th>特殊厨具提醒</th>
+					<td colspan='2'>
+						<span id="toolsLabel" view="UI.Label"></span>
+					</td>
+				</tr>
+				<tr>
+					<th>
+						客户的其他要求
+					</th>
+					<td colspan='2'>
+						<textarea style='min-width: 320px' name='summary'></textarea>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</form>
+	<div id="logLabel" view="UI.Label" class='log'>
+		
+	</div>
+</div>
+</body>
+</html>

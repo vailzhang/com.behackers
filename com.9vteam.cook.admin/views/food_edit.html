@@ -1,0 +1,109 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf8">
+<title>Hailong Studio</title>
+<link rel="stylesheet" href="css/style.css" />
+
+<script type='text/javascript' src='js.php' ></script>
+<script type='text/javascript'>
+
+	function addTextInput(el,name){
+		
+		var p = $(el).parents("ul");
+		
+		var inputs = $("input[type='text']",p);
+		
+		var c = inputs.size();
+		
+		$("<li><input type='text' name='"+name+c+"' /></li>").insertBefore($(el).parents("li"));
+		
+	}
+	
+</script>
+</head>
+<body>
+<div class='screen'>
+	<div class="toolbar">
+		<p><a href="javascript:history.back();">&lt;返回</a></p>
+	</div>
+
+	<form method="post" action="?" enctype="multipart/form-data" id="editForm" view="UI.Form" accept-charset="utf8">
+		<h2>菜品</h2>
+		<input type="hidden" name="fid"></input>
+		
+		<label id="msgLabel" view="UI.Label" class="error"></label><br/>
+		
+		<label>菜品名称</label><br />
+		<input type="text" name="title"></input><br />
+		<br/>
+		
+		<label>所属菜系</label><br />
+		<div id="cuisineLabel" view="UI.Label"></div><br />
+		<br/>
+		
+		<label>口味</label><br />
+		<div id="classifyLabel" view="UI.Label"></div><br />
+		<br/>
+		
+		<label>菜品介绍</label><br />
+		<textarea name="summary"></textarea><br />
+		<br/>
+		
+		<label>主料</label><br />
+		<ul id="mpLabel" view="UI.Label">
+			<li><input type="text" name="mp_0"></input></li>
+			<li><input type="text" name="mp_1"></input></li>
+			<li><input type="text" name="mp_2"></input></li>
+			<li><input type="text" name="mp_3"></input></li>
+			<li><input type="text" name="mp_4"></input></li>
+			<li><input type="button" value="增加" onclick="addTextInput(this,'mp_')" /></li>
+		</ul>
+		<br/>
+		
+		<label>辅料</label><br />
+		<ul id="msLabel" view="UI.Label">
+			<li><input type="text" name="ms_0"></input></li>
+			<li><input type="text" name="ms_1"></input></li>
+			<li><input type="text" name="ms_2"></input></li>
+			<li><input type="text" name="ms_3"></input></li>
+			<li><input type="text" name="ms_4"></input></li>
+			<li><input type="button" value="增加" onclick="addTextInput(this,'mp_')" /></li>
+		</ul>
+		<br/>
+		
+		<label>调料</label><br />
+		<ul id="mfLabel" view="UI.Label">
+			<li><input type="text" name="mf_0"></input></li>
+			<li><input type="text" name="mf_1"></input></li>
+			<li><input type="text" name="mf_2"></input></li>
+			<li><input type="text" name="mf_3"></input></li>
+			<li><input type="text" name="mf_4"></input></li>
+			<li><input type="button" value="增加" onclick="addTextInput(this,'mp_')" /></li>
+		</ul>
+		<br/>
+		
+		<label>特殊厨具</label><br />
+		<input type="text" name="tools"></input><br />
+		<br/>
+		
+		<label>增加加工费</label><br />
+		<input type="text" name="additional"></input><br />
+		<br/>
+		
+		<label>菜品图片</label><br />
+		<input type="file" name="image"></input><br />
+		<input type="hidden" name="imageUrl"></input><br />
+		<img id="imageView" view="UI.View" width="180px" style="display:none;"></img>
+		<br/>
+	
+		<div>
+			<input class='button' type='button' value='取消' onclick="history.back();" ></input>
+			<input class='button' type='submit' value='提交' ></input>
+		</div>
+
+	</form>
+
+</div>
+</body>
+</html>

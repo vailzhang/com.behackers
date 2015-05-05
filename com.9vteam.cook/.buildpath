@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<buildpath>
+	<buildpathentry combineaccessrules="false" kind="prj" path="/org.hailong.device"/>
+	<buildpathentry combineaccessrules="false" kind="prj" path="/org.hailong.apple"/>
+	<buildpathentry combineaccessrules="false" kind="prj" path="/org.hailong.app"/>
+	<buildpathentry combineaccessrules="false" kind="prj" path="/org.hailong.o2o"/>
+	<buildpathentry combineaccessrules="false" kind="prj" path="/org.hailong.account"/>
+	<buildpathentry kind="con" path="org.eclipse.php.core.LANGUAGE"/>
+	<buildpathentry combineaccessrules="false" kind="prj" path="/org.hailong.authority"/>
+	<buildpathentry combineaccessrules="false" kind="prj" path="/org.hailong.comment"/>
+	<buildpathentry combineaccessrules="false" kind="prj" path="/org.hailong.db"/>
+	<buildpathentry combineaccessrules="false" kind="prj" path="/org.hailong.classify"/>
+	<buildpathentry kind="src" path=""/>
+	<buildpathentry combineaccessrules="false" kind="prj" path="/org.hailong.service"/>
+</buildpath>

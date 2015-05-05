@@ -1,0 +1,73 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf8">
+<title>Hailong Studio</title>
+<link rel="stylesheet" href="css/style.css" />
+
+<script type='text/javascript' src='js.php' ></script>
+<script type='text/javascript'>
+
+	function addTextInput(el,name){
+		
+		var p = $(el).parents("ul");
+		
+		var inputs = $("input[type='text']",p);
+		
+		var c = inputs.size();
+		
+		$("<li><input type='text' name='"+name+c+"' /></li>").insertBefore($(el).parents("li"));
+		
+	}
+	
+</script>
+</head>
+<body>
+<div class='screen'>
+	<div class="toolbar">
+		<p><a href="javascript:history.back();">&lt;返回</a></p>
+	</div>
+
+	<form method="post" action="?" enctype="multipart/form-data" id="editForm" view="UI.Form" accept-charset="utf8">
+		<h2>套餐</h2>
+		<input type="hidden" name="pid"></input>
+		
+		<label id="msgLabel" view="UI.Label" class="error"></label><br/>
+		
+		<label>套餐名称</label><br />
+		<input type="text" name="title"></input><br />
+		<br/>
+		
+		<label>套餐价格</label><br />
+		<input type="text" name="price"></input><br />
+		<br/>
+		
+		<label>套餐规格</label><br />
+		<input type="text" name="format"></input><br />
+		<br/>
+		
+		<label>套餐描述</label><br />
+		<textarea name="summary"></textarea><br />
+		<br/>
+		
+		<label>菜品</label><br />
+		<ul id="foodsLabel" view="UI.Label">
+			<li><input type="text" name="food_0"></input></li>
+			<li><input type="text" name="food_1"></input></li>
+			<li><input type="text" name="food_2"></input></li>
+			<li><input type="text" name="food_3"></input></li>
+			<li><input type="text" name="food_4"></input></li>
+			<li><input type="button" value="增加" onclick="addTextInput(this,'food_')" /></li>
+		</ul>
+		<br/>
+
+		<div>
+			<input class='button' type='button' value='取消' onclick="history.back();" ></input>
+			<input class='button' type='submit' value='提交' ></input>
+		</div>
+
+	</form>
+
+</div>
+</body>
+</html>
